@@ -2,7 +2,19 @@
 #include "calculator.h"
 %}
 
-%token ADD NUM VAR EQU
+
+%union{
+	t_var num;
+	char * var;
+}
+
+%token <t_var> NUM
+%token <var> VAR
+%token ADD EQU BR
+
+%type <num> term exp varline
+
+%type <var> name;
 
 %%
 
@@ -13,24 +25,41 @@ lines
 
 line
 	: set
-	| exp
+	| varline
 ;
 
 set
-	: VAR EQU NUM {
+	: name EQU term {
+		var_set($1, $3);
+	}
+;
 
+term
+	: NUM {
+		$$ = atoi(yytext);
+	}
+;
+
+name
+	: VAR {
+		$$ = str_clone(yytext);
 	}
 ;
 
 exp
-	: NUM ADD NUM {
-
+	: term ADD term {
+		$$ = $1 + $3;
 	}
 
-	| exp ADD NUM {
-
+	| exp ADD term {
+		$$ = $1 + $3;
 	}
 ;
+
+varline
+	: exp BR {
+		printf("%d\n", $$);
+	}
 %%
 
 int main(){

@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "calculator.tab.h"
 #define D printf
 #define MAX_VAR_SIZE	100
 
@@ -12,7 +11,7 @@ void yyerror(char *e);
 int yylex();
 
 extern int yylineno;
-
+extern char * yytext;
 
 typedef int t_var;
 
@@ -29,6 +28,7 @@ int var_inx(const char *name);
 t_var var_valof(int ix);
 int var_set(const char *name, t_var val);
 
+#include "calculator.tab.h"
 #endif
 
 
