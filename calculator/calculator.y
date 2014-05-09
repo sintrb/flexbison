@@ -10,11 +10,16 @@
 
 %token <t_var> NUM
 %token <var> VAR
-%token ADD EQU BR
+%token EQU BR
 
-%type <num> term exp varline
+%token ADD SUB MUL DIV
 
-%type <var> name;
+%type <num> exp
+%type <var> varname
+
+
+%left ADD SUB
+%left MUL DIV
 
 %%
 
@@ -24,42 +29,50 @@ lines
 ;
 
 line
-	: set
-	| varline
-;
-
-set
-	: name EQU term {
+	: BR
+	| exp BR {
+		O("=%d\n", $1);
+	}
+	| varname EQU exp {
 		var_set($1, $3);
+		free($1);
+		$1=NULL;
+		O("\n");
 	}
 ;
 
-term
-	: NUM {
-		$$ = atoi(yytext);
-	}
-;
-
-name
+varname
 	: VAR {
 		$$ = str_clone(yytext);
 	}
 ;
 
 exp
-	: term ADD term {
+	: NUM {
+		$$ = atoi(yytext);
+	}
+	
+	| varname {
+		$$ = var_val($1);
+	}
+
+	| exp ADD exp {
 		$$ = $1 + $3;
 	}
 
-	| exp ADD term {
-		$$ = $1 + $3;
+	| exp SUB exp {
+		$$ = $1 - $3;
+	}
+
+	| exp MUL exp {
+		$$ = $1 * $3;
+	}
+
+	| exp DIV exp {
+		$$ = $1 / $3;
 	}
 ;
 
-varline
-	: exp BR {
-		printf("%d\n", $$);
-	}
 %%
 
 int main(){
@@ -68,6 +81,6 @@ int main(){
 }
 
 void yyerror(char *e){
-	printf("%s:%d\n",e,yylineno);
+	E("%s:%d\n",e,yylineno);
 }
 

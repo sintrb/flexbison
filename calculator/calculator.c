@@ -19,14 +19,22 @@ int var_inx(const char *name){
 		if (var_names[i] && strcmp(var_names[i], name)==0)
 			return i;
 	}
-	D("no(%s)", name);
 	return -1;
+}
+t_var var_val(const char *name){
+	int ix = var_inx(name);
+	if(ix>=0){
+		return var_valof(ix);
+	}
+	else{
+		E("Unknow (%s)",name);
+	}
+
 }
 t_var var_valof(int ix){
 	if(ix>=0 && ix<MAX_VAR_SIZE)
 		return var_vals[ix];
 	else{
-		D("no(%d)", ix);
 		return 0;
 	}
 }
@@ -34,7 +42,13 @@ int var_set(const char *name, t_var val){
 	int i;
 	for (i = 0; i < MAX_VAR_SIZE; ++i){
 		if (!var_names[i]){
+			// add
 			var_names[i] = str_clone(name);
+			var_vals[i] = val;
+			return i;
+		}
+		if (strcmp(var_names[i], name) == 0){
+			// update
 			var_vals[i] = val;
 			return i;
 		}

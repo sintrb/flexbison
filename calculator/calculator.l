@@ -10,18 +10,42 @@
 
 
 "+" {
+	O("+");
 	RTK(ADD);
 }
 
+"-" {
+	O("-");
+	RTK(SUB);
+}
+
+"*" {
+	O("*");
+	RTK(MUL);
+}
+
+"/" {
+	O("/");
+	RTK(DIV);
+}
+
 "=" {
+	O("=");
 	RTK(EQU);
 }
 
+[0-9]+\.[0-9]+ {
+	O(yytext);
+	RTK(NUM);
+}
+
 [0-9]+ {
+	O(yytext);
 	RTK(NUM);
 }
 
 [a-zA-Z]+ {
+	O(yytext);
 	RTK(VAR);
 }
 
