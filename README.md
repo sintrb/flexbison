@@ -10,6 +10,25 @@ some flex &amp; bison demo
 
 * Windows 上面所需的flex bison gcc 可以去这[下载](http://pan.baidu.com/s/1hqHt4OG)
 
+### 结构说明
+
+#### 通用
+* make.bat 生成exe并做测试用的脚本
+* clean.bat 清空编译过程产生的中间文件
+* *.l 词法文件
+* *.y 语法文件
+* *.h *c 可能用到的C代码封装
+
+#### 项目
+
+##### wordcount(已完成)
+
+一个简单的wc程序，可统计行数和字符数字
+
+##### calculator(进行中...)
+
+一个简单的计算器
+
 =
 
 ## 怎么获取这些代码？
