@@ -21,11 +21,11 @@ some flex &amp; bison demo
 
 #### 项目
 
-##### wordcount(已完成)
+##### /wordcount (已完成)
 
 一个简单的wc程序，可统计行数和字符数字
 
-##### calculator(进行中...)
+##### /calculator (进行中...)
 
 一个简单的计算器
 
