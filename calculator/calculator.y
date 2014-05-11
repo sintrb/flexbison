@@ -12,7 +12,7 @@
 %token <var> VAR
 %token EQU BR
 
-%token ADD SUB MUL DIV
+%token ADD SUB MUL DIV BL BR
 
 %type <num> exp
 %type <var> varname
@@ -52,6 +52,10 @@ exp
 		$$ = atoi(yytext);
 	}
 	
+	| BL exp BR {
+		$$ = $2;
+	}
+
 	| varname {
 		$$ = var_val($1);
 	}
