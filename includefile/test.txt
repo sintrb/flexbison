@@ -1,0 +1,7 @@
+upper will make all lower letter to upper.
+and it a demo for "include" file if flex.
+now, begin a poem.
+-----
+#include poem.txt
+-----
+the end!
