@@ -21,11 +21,11 @@ some flex &amp; bison demo
 
 #### 项目
 
-##### [wordcount](/sintrb/flexbison/tree/master/wordcount) (已完成)
+##### [wordcount](https://github.com/sintrb/flexbison/tree/master/wordcount) (已完成)
 
 一个简单的wc程序，可统计行数和字符数字
 
-##### [calculator](/sintrb/flexbison/tree/master/calculator) (已完成)
+##### [calculator](https://github.com/sintrb/flexbison/tree/master/calculator) (已完成)
 
 一个简单的计算器
 
